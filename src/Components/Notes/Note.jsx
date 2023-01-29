@@ -2,10 +2,11 @@ import React from 'react'
 import './Notes.css'
 
 function Note() {
+
     return (
         <>
             <div>
-                Note
+                <h2>Note</h2>
             </div>
         </>
     )
