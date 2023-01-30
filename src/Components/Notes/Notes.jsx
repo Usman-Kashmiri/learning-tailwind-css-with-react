@@ -7,13 +7,7 @@ function Notes(props) {
 
     const renderNotes = props.notes.map((note, index) => {
         return (
-            <div key={index} className='max-w-sm rounded overflow-hidden shadow-lg py-6 px-4 bg-white'>
-                <div className='flex justify-end'>
-                    <span className='inline-block bg-gray-200 rounded-full px-4 py-1 text-xs font-bold text-gray-700 mr-2 mb-2'>#{note.category}</span>
-                </div>
-                <h2 className='font-bold text-xl mb-2'>{note.note_title}</h2>
-                <p className='text-gray-700 text-base'>{note.note_description}</p>
-            </div>
+            <Note noteValues={note} key={index}/>
         );
     })
 
@@ -30,7 +24,7 @@ function Notes(props) {
                 </Link>
                 <h2 className='mt-4 text-2xl font-bold text-center underline text-slate-700'>Notes:</h2>
 
-                <div className='grid grid-cols-3 my-8 gap-8 w-full'>
+                <div className='grid grid-cols-3 my-8 gap-6 w-full'>
                     {renderNotes}
                 </div>
             </div>

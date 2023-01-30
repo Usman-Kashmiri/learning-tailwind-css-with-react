@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import './Form.css'
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import { FormSchema } from './FormSchema';
 import GoBackBtn from '../GoBackBtn';
@@ -28,8 +27,7 @@ function Form(props) {
         errors,
         touched,
         isValid,
-        dirty,
-        setValue
+        dirty
     } = useFormik({
         initialValues: initialFormValues,
         validationSchema: FormSchema,
