@@ -1,9 +1,9 @@
 import React from 'react'
-import './Form.css'
 import { useFormik } from 'formik';
 import { useNavigate } from "react-router-dom";
 import { FormSchema } from './FormSchema';
 import GoBackBtn from '../GoBackBtn';
+import { v4 } from 'uuid'
 
 function Form(props) {
 
@@ -14,6 +14,7 @@ function Form(props) {
         btnClasses = "bg-green-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center shadow";
 
     const initialFormValues = {
+        note_id: "",
         note_title: "",
         note_description: "",
         category: "",
@@ -32,6 +33,7 @@ function Form(props) {
         initialValues: initialFormValues,
         validationSchema: FormSchema,
         onSubmit: async (values, actions) => {
+            values.note_id = v4();
             await props.addNoteHandler(values);
             actions.resetForm();
             navigate('/');
@@ -55,7 +57,22 @@ function Form(props) {
                     </div>
                     <div className='mb-4'>
                         <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='category'>Note Category:</label>
-                        <input type='text' name='category' id='category' placeholder='Enter Note Category' value={values.category} onBlur={handleBlur} onChange={handleChange} className={errors.category && touched.category ? inputFieldErrorClasses : inputFieldClasses} />
+                        <div className='flex justify-end'>
+                            <select defaultValue='default' name='category' id='category' onBlur={handleBlur} onChange={handleChange} className={errors.category && touched.category ? inputFieldErrorClasses + " block appearance-none pr-8 rounded leading-tight" : inputFieldClasses}>
+                                <option value='default' disabled>Select a Note Category</option>
+                                <option value="Hisab Kitab">Hisab Kitab</option>
+                                <option value="Udhar">Udhar</option>
+                                <option value="Sodah Surf">Sodah Surf</option>
+                                <option value="Important">Important</option>
+                                <option value="Berry Important">Bery Important</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Berry Personal">Berry Personal</option>
+                                <option value="Mamlaat">Mamlaat</option>
+                            </select>
+                            <div className="pointer-events-none absolute flex justify-end items-center px-2 text-gray-700 mt-2">
+                                <svg className="fill-current h-7 w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                            </div>
+                        </div>
                         {(errors.category && touched.category) ? <span style={{ color: "red" }}>{errors.category}</span> : null}
                     </div>
                     <div className='flex justify-end'>
