@@ -23,8 +23,6 @@ function EditNote(props) {
     category: category,
   };
 
-  const category_options = ["Hisab Kitab","Udhar","Sodah Surf","Important","Berry Important","Personal","Berry Personal","Mamlaat"];
-
   const {
     handleChange,
     handleBlur,
@@ -61,10 +59,10 @@ function EditNote(props) {
           <div className='mb-4'>
             <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='category'>Note Category:</label>
             <div className='flex justify-end'>
-              <select defaultValue={category} name='category' id='category' onBlur={handleBlur} onChange={handleChange} className={errors.category && touched.category ? inputFieldErrorClasses + " block appearance-none pr-8 rounded leading-tight" : inputFieldClasses}>
+              <select defaultValue={category} name='category' id='category' onBlur={handleBlur} onChange={handleChange} className={errors.category && touched.category ? inputFieldErrorClasses + " block pr-8" : inputFieldClasses}>
                 <option disabled>Select a Note Category</option>
                 {
-                  category_options.map((option, index)=> {
+                  props.category_options.map((option, index)=> {
                     return (<option value={option} key={index}>{option}</option>)
                   })
                 }
